@@ -63,3 +63,35 @@ measurements:
           criteria should be confirmed with another test subsequently.
         locator: "§3.1, printed page 9"
         from: "ICMR Guidelines for Management of Type 2 Diabetes 2018"
+
+  - measurement: haemoglobin-a1c
+    code: "LOINC:4548-4"
+    unit: "%"
+    applies_to: adults
+    bands:
+      - band: normal
+        upto: 5.6
+        severity: none
+        means: "This is a normal HbA1c."
+        quote: >-
+          Normal: Less than 5.7%
+        locator: "Table 3.1, printed page 10"
+        from: "ICMR Guidelines for Management of Type 2 Diabetes 2018"
+
+      - band: prediabetes
+        upto: 6.4
+        severity: watch
+        means: "This is in the range a doctor calls prediabetes."
+        quote: >-
+          Prediabetes: 5.7 to 6.4%
+        locator: "Table 3.1, printed page 10"
+        from: "ICMR Guidelines for Management of Type 2 Diabetes 2018"
+
+      - band: diabetes-range
+        severity: watch
+        means: "This is in the range a doctor calls diabetes."
+        quote: >-
+          HbA1c ≥ 6.5% — Diabetes diagnosed using any of these criteria should be confirmed
+          with another test subsequently.
+        locator: "§3.1, printed page 9"
+        from: "ICMR Guidelines for Management of Type 2 Diabetes 2018"
