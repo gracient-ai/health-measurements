@@ -1,0 +1,65 @@
+# Health measurements, written by hand.
+#
+# The design says a repository can be authored by hand and that the extractor only ever
+# proposes what a person could have written here. This is that file: until a model reads the PDFs, it
+# IS the proposal, and `ai/knowledge` returns it unchanged.
+#
+# Every quote was read out of the document it cites. `from` matches a document by its title,
+# because the AI plane is given bucket keys and titles and never a row identifier.
+
+measurements:
+  - measurement: fasting-plasma-glucose
+    code: "LOINC:1558-6"
+    unit: "mg/dL"
+    applies_to: adults
+    bands:
+      - band: severe-low
+        upto: 54
+        severity: critical
+        means: "Your sugar is dangerously low."
+        action: "Eat or drink something sweet now."
+        quote: >-
+          Typically, neurogenic and neuroglycopenic symptoms of hypoglycemia occur at a
+          glucose level of or below 50 to 55 mg/dL
+        locator: "History and Physical"
+        from: "StatPearls — Hypoglycemia"
+
+      - band: low
+        upto: 69
+        severity: watch
+        means: "Your sugar is lower than it should be."
+        quote: >-
+          Hypoglycemia is often defined by a plasma glucose concentration below 70 mg/dL
+        locator: "Introduction"
+        from: "StatPearls — Hypoglycemia"
+
+      - band: normal
+        upto: 109
+        severity: none
+        means: "This is a normal fasting sugar."
+        quote: "Normoglycemia (WHO) < 110"
+        locator: "Table 3.1, printed page 10"
+        from: "ICMR Guidelines for Management of Type 2 Diabetes 2018"
+
+      - band: raised
+        upto: 125
+        severity: watch
+        means: "Higher than normal, but not diabetes."
+        action: >-
+          Individuals with pre-diabetes should receive education on intensive lifestyle
+          modification so as to delay or prevent their progression to diabetes.
+        quote: >-
+          The term “prediabetes” refers to a situation where the blood glucose levels are
+          higher than normal, but not high enough to warrant a diagnosis of diabetes
+        locator: "§3.3, printed page 9"
+        from: "ICMR Guidelines for Management of Type 2 Diabetes 2018"
+
+      - band: diabetes-range
+        upto: null
+        severity: watch
+        means: "This is in the range a doctor calls diabetes."
+        quote: >-
+          Fasting plasma glucose ≥ 126 mg/dl* — Diabetes diagnosed using any of these
+          criteria should be confirmed with another test subsequently.
+        locator: "§3.1, printed page 9"
+        from: "ICMR Guidelines for Management of Type 2 Diabetes 2018"
