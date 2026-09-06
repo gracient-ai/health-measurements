@@ -1,0 +1,33 @@
+# What must hold before anything merges. Set as a required status check on `main`, so GitHub
+# enforces it rather than the console reporting it afterwards.
+#
+# These run here rather than in whatever produced the file. A proposer that certifies its own
+# proposal certifies anything.
+
+name: checks
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+
+jobs:
+  checks:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - run: pip install pyyaml
+
+      - name: the file reads, every band is quoted, and the ranges run upwards
+        run: python .github/check.py measurements.yaml
+
+      - name: the rendered file matches the file it was generated from
+        run: |
+          python .github/render.py measurements.yaml > /tmp/rendered.md
+          # A rendered file that has drifted is a doctor approving a diff of something else.
+          diff -u measurements.md /tmp/rendered.md
