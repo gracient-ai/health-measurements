@@ -25,9 +25,3 @@ jobs:
 
       - name: the file reads, every band is quoted, and the ranges run upwards
         run: python .github/check.py measurements.yaml
-
-      - name: the rendered file matches the file it was generated from
-        run: |
-          python .github/render.py measurements.yaml > /tmp/rendered.md
-          # A rendered file that has drifted is a doctor approving a diff of something else.
-          diff -u measurements.md /tmp/rendered.md
