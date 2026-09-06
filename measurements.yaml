@@ -37,7 +37,6 @@ measurements:
         upto: 109
         severity: none
         means: "This is a normal fasting sugar."
-        quote: "Normoglycemia (WHO) < 110"
         locator: "Table 3.1, printed page 10"
         from: "ICMR Guidelines for Management of Type 2 Diabetes 2018"
 
