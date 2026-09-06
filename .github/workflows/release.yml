@@ -1,0 +1,33 @@
+# Cutting a tag is what puts a commit in front of patients.
+#
+# It deploys to the `patients` environment, which is where the rule about which tags may go
+# out lives, and which can require an approver of its own. The job itself does one thing:
+# tells the console which commit is live.
+
+name: release
+
+on:
+  push:
+    tags: ["v*"]
+
+jobs:
+  switch:
+    runs-on: ubuntu-latest
+    environment: patients
+    steps:
+      - name: tell the console what is live
+        env:
+          CONSOLE: ${{ vars.CONSOLE_BASE_URL }}
+          SECRET: ${{ secrets.SWITCH_SECRET }}
+          TYPE: ${{ vars.KNOWLEDGE_TYPE }}
+        run: |
+          set -euo pipefail
+          # The whole commit, not the abbreviation: the console refuses anything shorter,
+          # because seven characters collide.
+          curl --fail-with-body -sS -X POST \
+            "$CONSOLE/api/console/types/$TYPE/live" \
+            -H "X-Switch-Secret: $SECRET" \
+            -H "Content-Type: application/json" \
+            -d "{\"sha\": \"${GITHUB_SHA}\",
+                 \"tag\": \"${GITHUB_REF_NAME}\",
+                 \"switched_by\": \"${GITHUB_ACTOR}\"}"
