@@ -88,6 +88,7 @@ measurements:
         from: "ICMR Guidelines for Management of Type 2 Diabetes 2018"
 
       - band: diabetes-range
+        upto: null
         severity: watch
         means: "This is in the range a doctor calls diabetes."
         quote: >-
